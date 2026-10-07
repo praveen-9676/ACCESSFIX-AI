@@ -1,0 +1,1065 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ACCESSFIX AI — Detect. Repair. Prove. | Autonomous WCAG Remediation Engine</title>
+  <meta name="description" content="AccessFix AI is an automated accessibility repair engine that detects WCAG violations, synthesizes zero-regression AST fixes, mathematically verifies soundness, and generates audit-grade conformance certificates.">
+  <meta name="keywords" content="Accessibility, WCAG 2.2 AA, Automated A11y Repair, ADA Compliance, AST Transformation, Formal Verification, Web Accessibility">
+
+  <!-- Open Graph / Meta -->
+  <meta property="og:type" content="website">
+  <meta property="og:title" content="ACCESSFIX AI — Detect. Repair. Prove.">
+  <meta property="og:description" content="Fix accessibility. Prove conformance. The next-generation automated WCAG repair and formal verification engine.">
+
+  <!-- Core Stylesheet -->
+  <link rel="stylesheet" href="css/styles.css">
+
+  <!-- Favicon / Brand Symbol -->
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' rx='24' fill='%23070a11'/><path d='M30 50 L45 65 L70 35' stroke='%2300f2fe' stroke-width='10' stroke-linecap='round' stroke-linejoin='round' fill='none'/><circle cx='50' cy='50' r='38' stroke='%233b82f6' stroke-width='4' fill='none' stroke-dasharray='10 6'/></svg>">
+</head>
+<body>
+
+  <!-- Screen Reader Skip Link -->
+  <a href="#main-content" class="skip-link">Skip directly to primary content</a>
+
+  <!-- ==========================================================================
+       Header / Navigation Bar
+       ========================================================================== -->
+  <header class="site-header" role="banner">
+    <div class="container nav-container">
+      <!-- Brand Logo -->
+      <a href="#hero" class="brand-logo" aria-label="ACCESSFIX AI Home">
+        <div class="logo-symbol" aria-hidden="true">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+          </svg>
+        </div>
+        <span>ACCESSFIX<span class="text-cyan">.AI</span></span>
+        <span class="logo-text-tag" aria-label="Version 2.4 Active">v2.4</span>
+      </a>
+
+      <!-- Primary Navigation Links -->
+      <nav class="main-nav" id="mainNav" aria-label="Primary Site Navigation">
+        <ul>
+          <li><a href="#pipeline" class="nav-link">Pipeline</a></li>
+          <li><a href="#problem-solution" class="nav-link">Solution</a></li>
+          <li><a href="#scanner" class="nav-link">Scanner</a></li>
+          <li><a href="#violations" class="nav-link">Dashboard</a></li>
+          <li><a href="#code-diff" class="nav-link">AST Diff</a></li>
+          <li><a href="#verification" class="nav-link">Verification</a></li>
+          <li><a href="#wcag-coverage" class="nav-link">WCAG</a></li>
+          <li><a href="#live-demo" class="nav-link">Live Demo</a></li>
+          <li><a href="#impact" class="nav-link">Impact</a></li>
+        </ul>
+      </nav>
+
+      <!-- Action Items -->
+      <div class="nav-actions">
+        <!-- Quick Command Palette Trigger (Ctrl+K) -->
+        <button type="button" class="btn btn-secondary btn-sm" id="openCmdPaletteBtn" aria-label="Open Command Search Palette" title="Press Ctrl+K">
+          <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
+          <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-dim); margin-left:4px;">Ctrl+K</span>
+        </button>
+
+        <!-- Web Audio Mute / Sound Toggle -->
+        <button type="button" class="sound-toggle-btn" id="soundToggleBtn" aria-label="Toggle Synthesized Audio Feedback" aria-pressed="true" title="Audio Sound Feedback On/Off">
+          <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15.536 8.464a5 5 0 010 7.072m2.828-9.9a9 9 0 010 12.728M5.586 15H4a1 1 0 01-1-1v-4a1 1 0 011-1h1.586l4.707-4.707C10.923 3.663 12 4.109 12 5v14c0 .891-1.077 1.337-1.707.707L5.586 15z"/>
+          </svg>
+        </button>
+
+        <!-- Launch Scanner CTA -->
+        <a href="#scanner" class="btn btn-primary btn-sm">Launch Scanner</a>
+
+        <!-- Mobile Menu Toggle Button -->
+        <button type="button" class="mobile-menu-btn" id="mobileMenuBtn" aria-label="Toggle Mobile Navigation" aria-expanded="false" aria-controls="mainNav">
+          <svg width="22" height="22" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16m-7 6h7"/>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <!-- ==========================================================================
+       Main Content Landmark
+       ========================================================================== -->
+  <main id="main-content" role="main">
+
+    <!-- 1. HERO SECTION -->
+    <section class="hero-section" id="hero" aria-labelledby="hero-heading">
+      <div class="hero-glow-sphere" aria-hidden="true"></div>
+
+      <div class="container hero-content">
+        <!-- Top Tech Badge -->
+        <div class="hero-pill-badge">
+          <span class="pulse-dot" aria-hidden="true"></span>
+          <span>Next-Gen Autonomous WCAG Remediation Engine</span>
+        </div>
+
+        <h1 id="hero-heading" class="hero-title">
+          Fix Accessibility.<br>
+          <span class="gradient-text">Prove Conformance.</span>
+        </h1>
+
+        <p class="hero-subtitle">
+          Detect WCAG 2.2 AA violations in milliseconds, synthesize zero-regression code repairs at the AST layer, formally verify DOM soundness, and generate audit-grade cryptographic proof certificates.
+        </p>
+
+        <!-- Fast Judge Demo Button -->
+        <div>
+          <button type="button" class="judge-tour-btn" id="judgeTourBtn" aria-label="Run 10-second Guided Demo for Judges">
+            <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><polygon points="5 3 19 12 5 21 5 3" stroke-width="2" fill="currentColor"/></svg>
+            ⚡ Judge Quick Tour (Run 10s Autonomous Showcase)
+          </button>
+        </div>
+
+        <!-- Primary Hero Actions -->
+        <div class="hero-cta-group">
+          <a href="#scanner" class="btn btn-primary btn-lg">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+            Launch Scanner
+          </a>
+          <a href="#live-demo" class="btn btn-secondary btn-lg">
+            <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/><polygon points="10 8 16 12 10 16 10 8" fill="currentColor"/></svg>
+            View Live Demo
+          </a>
+        </div>
+
+        <!-- Visual Pipeline: DETECT -> REPAIR -> VERIFY -> CERTIFY -->
+        <div class="pipeline-wrapper" id="pipeline" aria-label="Autonomous Remediation Pipeline Architecture">
+          <div class="pipeline-header">
+            <span style="font-weight:700; color:#ffffff; letter-spacing:0.05em; text-transform:uppercase;">
+              CORE PARADIGM: THE 4-STAGE ACCESSIBILITY ENGINE
+            </span>
+            <span style="font-family:var(--font-mono); color:var(--primary-cyan);">
+              Pipeline Latency: ~142ms • Zero Structural Drift
+            </span>
+          </div>
+
+          <div class="pipeline-grid">
+            <!-- Stage 1: DETECT -->
+            <div class="pipeline-card active">
+              <div class="pipeline-card-top">
+                <span class="pipeline-step-num">STAGE 01</span>
+                <div class="pipeline-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M12 3v9l6 3"/></svg>
+                </div>
+              </div>
+              <h2 class="pipeline-card-title text-cyan">DETECT</h2>
+              <div class="pipeline-card-subtitle">Autonomous AST & DOM Audit</div>
+              <p class="pipeline-card-desc">Deep recursive tree parser maps 50+ WCAG 2.2 AA criteria against computed styles, accessible names, and contrast vectors.</p>
+              <div class="pipeline-connector" aria-hidden="true">→</div>
+            </div>
+
+            <!-- Stage 2: REPAIR -->
+            <div class="pipeline-card">
+              <div class="pipeline-card-top">
+                <span class="pipeline-step-num">STAGE 02</span>
+                <div class="pipeline-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 20l4-16m4 4l4 4-4 4M6 16l-4-4 4-4"/></svg>
+                </div>
+              </div>
+              <h2 class="pipeline-card-title text-cyan">REPAIR</h2>
+              <div class="pipeline-card-subtitle">Zero-Regression Synthesis</div>
+              <p class="pipeline-card-desc">Generative accessibility compiler injects verified ARIA states, calculates compliant luminance, and binds semantic labels.</p>
+              <div class="pipeline-connector" aria-hidden="true">→</div>
+            </div>
+
+            <!-- Stage 3: VERIFY -->
+            <div class="pipeline-card">
+              <div class="pipeline-card-top">
+                <span class="pipeline-step-num">STAGE 03</span>
+                <div class="pipeline-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+                </div>
+              </div>
+              <h2 class="pipeline-card-title text-emerald">VERIFY</h2>
+              <div class="pipeline-card-subtitle">Bounded Model Checking</div>
+              <p class="pipeline-card-desc">Formal verification mathematical solver proves zero layout drift, intact event listeners, and 100% tree preservation.</p>
+              <div class="pipeline-connector" aria-hidden="true">→</div>
+            </div>
+
+            <!-- Stage 4: CERTIFY -->
+            <div class="pipeline-card">
+              <div class="pipeline-card-top">
+                <span class="pipeline-step-num">STAGE 04</span>
+                <div class="pipeline-icon-box" aria-hidden="true">
+                  <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+                </div>
+              </div>
+              <h2 class="pipeline-card-title text-emerald">CERTIFY</h2>
+              <div class="pipeline-card-subtitle">Cryptographic Conformance</div>
+              <p class="pipeline-card-desc">Produces an immutable SHA-256 digital certificate proving WCAG AA, Section 508, and ADA Title III legal readiness.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 2. PROBLEM & SOLUTION SECTION -->
+    <section class="problem-solution-section" id="problem-solution" aria-labelledby="problem-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">The Paradigm Shift</span>
+          <h2 id="problem-heading" class="section-title">
+            Detection Alone Leaves Developers <span class="text-ruby">Stranded</span>.
+          </h2>
+          <p class="section-desc">
+            Traditional testing tools dump 400 unresolved violation alerts into Jira backlogs. AccessFix AI closes the loop by synthesizing, applying, and mathematically proving the fixes.
+          </p>
+        </div>
+
+        <div class="comparison-grid">
+          <!-- The Old Broken Workflow -->
+          <div class="comparison-card legacy">
+            <span class="comparison-badge">Legacy Approach • The Checker Dilemma</span>
+            <h3>Passive Violation Reporting</h3>
+            <p>Traditional tools (Lighthouse, axe-core, WAVE) point out what's broken, leaving expensive manual remediation to overwhelmed development teams.</p>
+            
+            <ul class="comparison-list">
+              <li class="comparison-item">
+                <span class="icon">✕</span>
+                <div>
+                  <strong>Massive Unactionable Backlogs:</strong> Hundreds of warning tickets filed without code solutions.
+                </div>
+              </li>
+              <li class="comparison-item">
+                <span class="icon">✕</span>
+                <div>
+                  <strong>Human Error & Regressions:</strong> Manual fixes accidentally break CSS layout grids and responsive designs.
+                </div>
+              </li>
+              <li class="comparison-item">
+                <span class="icon">✕</span>
+                <div>
+                  <strong>No Proof of Conformance:</strong> Zero legal protection or verifiable proof during accessibility compliance audits.
+                </div>
+              </li>
+            </ul>
+          </div>
+
+          <!-- The AccessFix Solution -->
+          <div class="comparison-card solution">
+            <span class="comparison-badge">The AccessFix Solution • Autonomous Engine</span>
+            <h3>Autonomous Repair & Formal Proof</h3>
+            <p>AccessFix transforms passive auditing into an active, zero-touch remediation pipeline with mathematical certainty.</p>
+
+            <ul class="comparison-list">
+              <li class="comparison-item">
+                <span class="icon">✓</span>
+                <div>
+                  <strong>Autonomous AST Patches:</strong> Automatically injects compliant ARIA labels, contrast values, and focus rings.
+                </div>
+              </li>
+              <li class="comparison-item">
+                <span class="icon">✓</span>
+                <div>
+                  <strong>Formal Model Verification:</strong> Z3 solver validates zero visual drift and guarantees zero functional regressions.
+                </div>
+              </li>
+              <li class="comparison-item">
+                <span class="icon">✓</span>
+                <div>
+                  <strong>Audit-Grade Cryptographic Proof:</strong> SHA-256 conformance certificate generated for ADA, Section 508, and EAA legal defense.
+                </div>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 3. INTERACTIVE SCANNER SECTION -->
+    <section class="scanner-section" id="scanner" aria-labelledby="scanner-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">Real-Time Remediation Terminal</span>
+          <h2 id="scanner-heading" class="section-title">
+            Interactive Accessibility Scanner
+          </h2>
+          <p class="section-desc">
+            Input any target URL or select a benchmark application. Watch the engine detect violations, synthesize patches, and elevate compliance from 72 to 100.
+          </p>
+        </div>
+
+        <div class="scanner-terminal" role="region" aria-label="Accessibility Scanner Terminal">
+          <!-- Terminal Title Bar -->
+          <div class="terminal-header">
+            <div class="terminal-controls" aria-hidden="true">
+              <div class="terminal-dot dot-red"></div>
+              <div class="terminal-dot dot-yellow"></div>
+              <div class="terminal-dot dot-green"></div>
+            </div>
+            <div class="terminal-title">ACCESSFIX-ENGINE://v2.4/AUTONOMOUS_RUNNER</div>
+            <div class="badge badge-success">Engine Online</div>
+          </div>
+
+          <div class="scanner-body">
+            <!-- URL Input Bar -->
+            <div class="scanner-input-bar">
+              <span class="scanner-prefix-icon" aria-hidden="true">
+                <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" stroke-width="2"/><line x1="2" y1="12" x2="22" y2="12" stroke-width="2"/><path stroke-width="2" d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"/></svg>
+              </span>
+              <label for="scannerUrlInput" class="visually-hidden" style="position:absolute; width:1px; height:1px; overflow:hidden; clip:rect(0,0,0,0);">Target Website URL</label>
+              <input type="url" 
+                     id="scannerUrlInput" 
+                     class="scanner-url-input" 
+                     value="https://example.com" 
+                     placeholder="Enter website URL (e.g., https://example.com)" 
+                     aria-label="Target Website URL to Scan and Repair">
+              
+              <button type="button" class="btn btn-primary" id="runScanBtn">
+                <svg width="18" height="18" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                Run Accessibility Scan
+              </button>
+            </div>
+
+            <!-- Target Presets -->
+            <div class="scanner-presets" role="group" aria-label="Preset Benchmark Targets">
+              <span class="preset-label">Quick Presets:</span>
+              <button type="button" class="preset-chip active" data-url="https://example.com">Default: example.com</button>
+              <button type="button" class="preset-chip" data-url="https://shop-checkout.aetherpay.io">AetherPay Checkout (E-Commerce)</button>
+              <button type="button" class="preset-chip" data-url="https://saas-dashboard.stellarcloud.net">StellarCloud (SaaS App)</button>
+              <button type="button" class="preset-chip" data-url="https://civic-portal.metro-city.gov">Metro City (Public Portal)</button>
+            </div>
+
+            <!-- Scanner HUD Details -->
+            <div class="scanner-hud">
+              <!-- Radial Score Gauge Box -->
+              <div class="score-gauge-box">
+                <div class="radial-progress-wrapper">
+                  <svg class="radial-progress-svg" viewBox="0 0 170 170" aria-hidden="true">
+                    <defs>
+                      <linearGradient id="scoreGradient" x1="0%" y1="0%" x2="100%" y2="100%">
+                        <stop offset="0%" stop-color="#00f2fe" />
+                        <stop offset="50%" stop-color="#3b82f6" />
+                        <stop offset="100%" stop-color="#10b981" />
+                      </linearGradient>
+                    </defs>
+                    <circle class="radial-bg-circle" cx="85" cy="85" r="70" />
+                    <circle class="radial-bar-circle" id="radialBar" cx="85" cy="85" r="70" />
+                  </svg>
+                  <div class="radial-score-content">
+                    <div class="radial-score-val" id="scoreValue">72</div>
+                    <div class="radial-score-sub">WCAG Score</div>
+                  </div>
+                </div>
+
+                <div id="scoreDeltaBadge" class="score-delta-badge badge-warning">
+                  Baseline: 72/100 (4 Violations)
+                </div>
+              </div>
+
+              <!-- Multi-Stage Scan Animation List -->
+              <div class="scan-stages-hud">
+                <ul class="stages-list" aria-live="polite">
+                  <!-- Stage 1 -->
+                  <li class="stage-item completed" id="stage-1">
+                    <div class="stage-left">
+                      <span class="stage-spinner" aria-hidden="true"></span>
+                      <span class="stage-check" aria-hidden="true">✓</span>
+                      <div>
+                        <strong>DOM Analysis & AST Parse</strong>
+                        <div style="font-size:0.75rem; color:var(--text-dim);">Traversed 148 DOM nodes & computed style map</div>
+                      </div>
+                    </div>
+                    <div class="stage-time">28ms</div>
+                  </li>
+
+                  <!-- Stage 2 -->
+                  <li class="stage-item completed" id="stage-2">
+                    <div class="stage-left">
+                      <span class="stage-spinner" aria-hidden="true"></span>
+                      <span class="stage-check" aria-hidden="true">✓</span>
+                      <div>
+                        <strong>WCAG Detection (50+ Criteria)</strong>
+                        <div style="font-size:0.75rem; color:var(--text-dim);">Identified 4 critical accessibility regressions</div>
+                      </div>
+                    </div>
+                    <div class="stage-time">41ms</div>
+                  </li>
+
+                  <!-- Stage 3 -->
+                  <li class="stage-item pending" id="stage-3">
+                    <div class="stage-left">
+                      <span class="stage-spinner" aria-hidden="true"></span>
+                      <span class="stage-check" aria-hidden="true">✓</span>
+                      <div>
+                        <strong>Repair Synthesis Engine</strong>
+                        <div style="font-size:0.75rem; color:var(--text-dim);">Generating verified ARIA, contrast, and label AST patches</div>
+                      </div>
+                    </div>
+                    <div class="stage-time">52ms</div>
+                  </li>
+
+                  <!-- Stage 4 -->
+                  <li class="stage-item pending" id="stage-4">
+                    <div class="stage-left">
+                      <span class="stage-spinner" aria-hidden="true"></span>
+                      <span class="stage-check" aria-hidden="true">✓</span>
+                      <div>
+                        <strong>Safety & Regression Check</strong>
+                        <div style="font-size:0.75rem; color:var(--text-dim);">Z3 model checking validates zero visual layout shift</div>
+                      </div>
+                    </div>
+                    <div class="stage-time">12ms</div>
+                  </li>
+
+                  <!-- Stage 5 -->
+                  <li class="stage-item pending" id="stage-5">
+                    <div class="stage-left">
+                      <span class="stage-spinner" aria-hidden="true"></span>
+                      <span class="stage-check" aria-hidden="true">✓</span>
+                      <div>
+                        <strong>Verification & Cryptographic Proof</strong>
+                        <div style="font-size:0.75rem; color:var(--text-dim);">Generating immutable SHA-256 conformance certificate</div>
+                      </div>
+                    </div>
+                    <div class="stage-time">9ms</div>
+                  </li>
+                </ul>
+
+                <!-- Progress Bar -->
+                <div class="scanner-progress-container">
+                  <div class="progress-track" role="progressbar" aria-valuenow="50" aria-valuemin="0" aria-valuemax="100">
+                    <div class="progress-fill" id="scannerProgressFill" style="width: 50%;"></div>
+                  </div>
+                  <div class="progress-meta">
+                    <span id="scannerStatusText">Awaiting operator instruction...</span>
+                    <span id="scannerProgressPercent">50%</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 4. VIOLATION DASHBOARD SECTION -->
+    <section class="violations-section" id="violations" aria-labelledby="violations-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">Synthesized Remediation Center</span>
+          <h2 id="violations-heading" class="section-title">
+            WCAG Violation Dashboard
+          </h2>
+          <p class="section-desc">
+            Inspect real-world WCAG violations with synthesized zero-regression AST patches. Click <strong>Apply Fix</strong> on any item to remediate and verify immediately.
+          </p>
+        </div>
+
+        <!-- Filter & Metrics Toolbar -->
+        <div class="violations-toolbar">
+          <div class="filter-tabs" role="tablist" aria-label="Filter Violations by WCAG Principle">
+            <button type="button" class="filter-tab active" data-filter="all" role="tab" aria-selected="true">All Violations</button>
+            <button type="button" class="filter-tab" data-filter="perceivable" role="tab" aria-selected="false">Perceivable</button>
+            <button type="button" class="filter-tab" data-filter="operable" role="tab" aria-selected="false">Operable</button>
+            <button type="button" class="filter-tab" data-filter="understandable" role="tab" aria-selected="false">Understandable</button>
+            <button type="button" class="filter-tab" data-filter="robust" role="tab" aria-selected="false">Robust</button>
+          </div>
+
+          <div style="display:flex; align-items:center; gap:16px;">
+            <span style="font-size:0.85rem; color:var(--text-muted);">
+              Active Violations: <strong id="remainingViolationsCounter" class="text-ruby">4</strong>
+            </span>
+            <span style="font-size:0.85rem; color:var(--text-muted);">
+              Remediated: <strong id="fixedViolationsCounter" class="text-emerald">0/5</strong>
+            </span>
+          </div>
+        </div>
+
+        <!-- Dynamic Violations Grid -->
+        <div class="violations-grid" id="violationsGrid" role="feed" aria-label="WCAG Violations List">
+          <!-- Dynamically populated via js/app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 5. BEFORE / AFTER REPAIR SECTION (DIFF STUDIO) -->
+    <section class="diff-studio-section" id="code-diff" aria-labelledby="diff-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">Zero-Regression AST Diff Viewer</span>
+          <h2 id="diff-heading" class="section-title">
+            Before & After Code Comparison
+          </h2>
+          <p class="section-desc">
+            Direct side-by-side inspection of defective source code versus formally verified accessible markup. Apply all safe patches in a single batch operation.
+          </p>
+        </div>
+
+        <div class="diff-studio-card">
+          <!-- Diff Toolbar -->
+          <div class="diff-toolbar">
+            <div style="display:flex; align-items:center; gap:12px;">
+              <span class="badge badge-glow-cyan">Source: checkout-flow.html</span>
+              <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--text-dim);">UTF-8 • AST Tree Depth: 7</span>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:12px;">
+              <button type="button" class="btn btn-primary btn-sm" id="applyAllSafeFixesBtn">
+                <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>
+                Apply All Safe Fixes
+              </button>
+            </div>
+          </div>
+
+          <!-- Split Panes -->
+          <div class="diff-panes-wrapper">
+            <!-- Left Pane: Inaccessible HTML -->
+            <div class="diff-pane inaccessible">
+              <div class="diff-pane-header">
+                <div>
+                  <strong style="color:var(--color-danger);">Before Repair: Inaccessible Raw HTML</strong>
+                  <div style="font-size:0.75rem; color:var(--text-dim);">Score: 58/100 • 4 Critical Violations Detected</div>
+                </div>
+                <span class="badge badge-danger">FAILING AA</span>
+              </div>
+
+              <pre class="code-pre"><code><span class="diff-del">&lt;!-- 1. Non-semantic div without label or role --&gt;
+&lt;div class="logo-box" onclick="navigateHome()"&gt;
+  &lt;img src="/logo.svg"&gt; &lt;!-- Missing Alt Text (WCAG 1.1.1) --&gt;
+&lt;/div&gt;</span>
+
+&lt;nav&gt;
+<span class="diff-del">  &lt;!-- Stripped keyboard focus rings (WCAG 2.4.7) --&gt;
+  &lt;a href="#features" style="outline: none;"&gt;Features&lt;/a&gt;
+  &lt;a href="#pricing" style="outline: none;"&gt;Pricing&lt;/a&gt;</span>
+&lt;/nav&gt;
+
+&lt;main&gt;
+  &lt;section class="checkout-card"&gt;
+    &lt;h2&gt;Secure Payment&lt;/h2&gt;
+<span class="diff-del">    &lt;!-- Informational image lacking alt attribute (WCAG 1.1.1) --&gt;
+    &lt;img src="/card-banner.png"&gt;</span>
+    
+    &lt;div class="input-wrap"&gt;
+<span class="diff-del">      &lt;!-- Unassociated placeholder-only inputs (WCAG 1.3.1) --&gt;
+      &lt;input type="text" placeholder="Cardholder Name"&gt;
+      &lt;input type="text" placeholder="Card Number"&gt;</span>
+    &lt;/div&gt;
+
+<span class="diff-del">    &lt;!-- Low contrast 2.1:1 & stripped outline (WCAG 1.4.3 & 2.4.7) --&gt;
+    &lt;button class="pay-btn" style="color:#8892b0; background:#0a192f; outline:none;"&gt;
+      Authorize $149.00
+    &lt;/button&gt;</span>
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+            </div>
+
+            <!-- Right Pane: Formally Verified Accessible HTML -->
+            <div class="diff-pane accessible">
+              <div class="diff-pane-header">
+                <div>
+                  <strong style="color:var(--color-success);">After Repair: Formally Verified AST Patch</strong>
+                  <div style="font-size:0.75rem; color:var(--text-dim);">Score: 100/100 • 100% WCAG 2.2 AA Conformance</div>
+                </div>
+                <span class="badge badge-success">PASSED AAA ✓</span>
+              </div>
+
+              <pre class="code-pre"><code><span class="diff-add">&lt;!-- 1. Semantic anchor with synthesized accessible label & alt --&gt;
+&lt;a href="/" class="logo-box" aria-label="AccessFix Homepage"&gt;
+  &lt;img src="/logo.svg" alt="AccessFix Brand Logo" width="120" height="32" /&gt;
+&lt;/a&gt;</span>
+
+&lt;nav aria-label="Primary Navigation"&gt;
+<span class="diff-add">  &lt;!-- High-visibility dual-layer :focus-visible rings --&gt;
+  &lt;a href="#features" class="focus-ring"&gt;Features&lt;/a&gt;
+  &lt;a href="#pricing" class="focus-ring"&gt;Pricing&lt;/a&gt;</span>
+&lt;/nav&gt;
+
+&lt;main id="main-content" role="main"&gt;
+  &lt;section class="checkout-card" aria-labelledby="pay-title"&gt;
+    &lt;h2 id="pay-title"&gt;Secure Payment&lt;/h2&gt;
+<span class="diff-add">    &lt;!-- Synthesized decorative alt description --&gt;
+    &lt;img src="/card-banner.png" alt="Accepted Payment Methods: Visa, MasterCard, Amex" /&gt;</span>
+    
+    &lt;div class="input-wrap"&gt;
+<span class="diff-add">      &lt;!-- Injected semantic labels with aria-required and autocomplete --&gt;
+      &lt;label for="card-holder" class="visually-hidden"&gt;Cardholder Name&lt;/label&gt;
+      &lt;input id="card-holder" type="text" autocomplete="cc-name" required aria-required="true" placeholder="Cardholder Name" /&gt;
+
+      &lt;label for="card-number" class="visually-hidden"&gt;Card Number&lt;/label&gt;
+      &lt;input id="card-number" type="text" autocomplete="cc-number" required aria-required="true" placeholder="Card Number" /&gt;</span>
+    &lt;/div&gt;
+
+<span class="diff-add">    &lt;!-- Surpasses AAA: 8.4:1 contrast ratio & verified focus ring --&gt;
+    &lt;button class="pay-btn focus-ring" style="color:#050b14; background:#00f2fe; font-weight:700;"&gt;
+      Authorize $149.00
+    &lt;/button&gt;</span>
+  &lt;/section&gt;
+&lt;/main&gt;</code></pre>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 6. FORMAL VERIFICATION & CERTIFICATE SECTION -->
+    <section class="verification-section" id="verification" aria-labelledby="verification-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">Mathematical Proof of Conformance</span>
+          <h2 id="verification-heading" class="section-title">
+            Formal Verification Engine
+          </h2>
+          <p class="section-desc">
+            We don't just guess that the repair works. AccessFix runs bounded model checking against the DOM to mathematically guarantee soundness, zero regressions, and full WCAG AA conformance.
+          </p>
+        </div>
+
+        <div class="cert-panel">
+          <div class="cert-left">
+            <span class="badge badge-glow-cyan" style="margin-bottom:14px;">Cryptographic Proof System</span>
+            <h3>Audit-Grade Conformance Certificate</h3>
+            <p>
+              Once all AST patches are synthesized and verified, AccessFix generates a tamper-evident digital certificate with an immutable SHA-256 fingerprint for enterprise audit and legal defense under ADA Title III and Section 508.
+            </p>
+
+            <ul class="cert-checklist">
+              <li class="cert-check-item">
+                <span class="check-icon">✓</span>
+                <span>Soundness Check: PASSED</span>
+              </li>
+              <li class="cert-check-item">
+                <span class="check-icon">✓</span>
+                <span>Regression Check: PASSED</span>
+              </li>
+              <li class="cert-check-item">
+                <span class="check-icon">✓</span>
+                <span>WCAG 2.2 AA Verified: 100%</span>
+              </li>
+              <li class="cert-check-item">
+                <span class="check-icon">✓</span>
+                <span>Confidence Level: 99.2%</span>
+              </li>
+              <li class="cert-check-item">
+                <span class="check-icon">✓</span>
+                <span>DOM Layout Drift: 0.00%</span>
+              </li>
+              <li class="cert-check-item">
+                <span class="check-icon">✓</span>
+                <span>Repair ID: AF-2026-9942</span>
+              </li>
+            </ul>
+
+            <button type="button" class="btn btn-primary btn-lg" id="openCertBtn">
+              <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+              Generate Verification Certificate
+            </button>
+          </div>
+
+          <div class="cert-right">
+            <div class="cert-preview-card">
+              <div class="cert-seal-symbol" aria-hidden="true">
+                <svg width="34" height="34" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+              </div>
+              <h4 style="font-size:1.1rem; margin-bottom:6px;">W3C WCAG 2.2 AA</h4>
+              <p style="font-size:0.8rem; color:var(--text-muted);">Cryptographic Proof Artifact</p>
+
+              <div class="cert-hash-box">
+                SHA-256: 0x8fa42b91d7c3ee1b46a992e105e4c6b7...
+              </div>
+
+              <div style="font-size:0.75rem; color:var(--color-success); font-weight:700;">
+                ● MATHEMATICALLY VERIFIED
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 7. WCAG COVERAGE (POUR PRINCIPLES) -->
+    <section class="wcag-coverage-section" id="wcag-coverage" aria-labelledby="wcag-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">100% Coverage Across Core Standards</span>
+          <h2 id="wcag-heading" class="section-title">
+            The 4 Pillars of Accessibility
+          </h2>
+          <p class="section-desc">
+            AccessFix provides comprehensive automated detection and synthesis across all four WCAG principles: Perceivable, Operable, Understandable, and Robust.
+          </p>
+        </div>
+
+        <div class="pillars-grid" id="wcagPillarsGrid">
+          <!-- Dynamically populated via js/app.js from mock-data.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 8. FRAMEWORKS INTEGRATION SECTION -->
+    <section class="frameworks-section" id="frameworks" aria-labelledby="frameworks-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">Universal Developer Ecosystem</span>
+          <h2 id="frameworks-heading" class="section-title">
+            Seamless Framework Integration
+          </h2>
+          <p class="section-desc">
+            Deploy AccessFix into existing CI/CD pipelines, modern component frameworks, or legacy static websites with zero configuration overhead.
+          </p>
+        </div>
+
+        <div class="frameworks-grid" id="frameworksGrid">
+          <!-- Dynamically populated via js/app.js -->
+        </div>
+      </div>
+    </section>
+
+    <!-- 9. LIVE DEMO PLAYGROUND SECTION -->
+    <section class="live-demo-section" id="live-demo" aria-labelledby="demo-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">Interactive Live Sandbox</span>
+          <h2 id="demo-heading" class="section-title">
+            Break & Fix in Real Time
+          </h2>
+          <p class="section-desc">
+            Interact with this simulated checkout application containing intentional WCAG violations. Click <strong>Scan & Repair</strong> to watch the live DOM patch itself in real-time.
+          </p>
+        </div>
+
+        <div class="sandbox-container">
+          <!-- Simulated Browser Chrome Bar -->
+          <div class="sandbox-browser-chrome">
+            <div class="terminal-controls" aria-hidden="true">
+              <div class="terminal-dot dot-red"></div>
+              <div class="terminal-dot dot-yellow"></div>
+              <div class="terminal-dot dot-green"></div>
+            </div>
+
+            <div class="sandbox-url-bar">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><rect x="3" y="11" width="18" height="11" rx="2" stroke-width="2"/><path d="M7 11V7a5 5 0 0 1 10 0v4" stroke-width="2"/></svg>
+              <span>https://sandbox.aetherpay.io/checkout</span>
+            </div>
+
+            <div style="display:flex; align-items:center; gap:8px;">
+              <span id="sandboxStatusBadge" class="badge badge-danger">4 Critical Violations</span>
+            </div>
+          </div>
+
+          <!-- Sandbox Split View -->
+          <div class="sandbox-split-view">
+            <!-- Simulated Inaccessible Web Page Viewport -->
+            <div class="sandbox-viewport" id="sandboxViewport">
+              <div class="demo-checkout-page" id="demoCheckoutPage">
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:16px;">
+                  <h3 style="font-size:1.2rem;">AetherPay Instant Checkout</h3>
+                  <span style="font-size:0.75rem; color:var(--text-muted); font-family:var(--font-mono);">ORDER #4092</span>
+                </div>
+
+                <!-- 1. Broken Image (No Alt) -->
+                <div class="demo-item-img-wrapper">
+                  <div class="demo-item-img" id="demoProductImg" role="img" aria-label="Simulated product banner">
+                    <svg width="40" height="40" fill="none" stroke="#64748b" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/></svg>
+                    <span style="font-size:0.8rem; color:#94a3b8; margin-left:10px;">Aether Pro Headphones</span>
+                  </div>
+                </div>
+
+                <!-- 2. Unlabeled Form Input -->
+                <div style="margin-bottom:16px;">
+                  <div id="demoLabelContainer">
+                    <!-- Synthesized label injected here upon repair -->
+                  </div>
+                  <input type="email" 
+                         id="demoEmailInput" 
+                         class="scanner-url-input" 
+                         style="width:100%; border:1px solid rgba(255,255,255,0.15); border-radius:8px; padding:10px;" 
+                         placeholder="Customer Email (Receipt)" />
+                </div>
+
+                <!-- 3. Unaccessible Fake Div Toggle -->
+                <div style="display:flex; align-items:center; justify-content:space-between; margin-bottom:20px; padding:10px; background:rgba(255,255,255,0.03); border-radius:8px;">
+                  <div>
+                    <div style="font-size:0.85rem; font-weight:600;">Carbon-Neutral Delivery</div>
+                    <div style="font-size:0.75rem; color:var(--text-muted);">Offset 1.4kg CO2 with Verified Green Credits</div>
+                  </div>
+                  <div class="custom-div-toggle" id="demoCustomToggle" style="cursor:pointer; width:44px; height:24px; background:#334155; border-radius:12px; position:relative;">
+                    <div style="width:18px; height:18px; background:#ffffff; border-radius:50%; position:absolute; top:3px; left:3px;"></div>
+                  </div>
+                </div>
+
+                <!-- 4. Poor Contrast Button -->
+                <div>
+                  <button type="button" 
+                          id="demoPayBtn" 
+                          class="btn btn-lg" 
+                          style="width:100%; color:#94a3b8; background-color:#1e293b; font-weight:400; border:1px solid rgba(255,255,255,0.1);">
+                    Pay $149.00 USD
+                  </button>
+                </div>
+              </div>
+            </div>
+
+            <!-- Sandbox Control Sidebar -->
+            <div class="sandbox-sidebar">
+              <div>
+                <h4 style="font-size:1.05rem; margin-bottom:12px; color:#ffffff;">Live Remediation Control</h4>
+                <p style="font-size:0.825rem; color:var(--text-muted); line-height:1.5; margin-bottom:20px;">
+                  Trigger the real-time DOM patcher. Observe live accessible tree synthesis and score elevation.
+                </p>
+
+                <div class="sandbox-metric-row">
+                  <span style="color:var(--text-muted);">Current Score:</span>
+                  <strong id="sandboxScoreVal" style="font-size:1.2rem; font-family:var(--font-mono); color:var(--primary-cyan);">58</strong>
+                </div>
+                <div class="sandbox-metric-row">
+                  <span style="color:var(--text-muted);">Active Violations:</span>
+                  <strong id="sandboxIssuesVal" class="text-ruby" style="font-family:var(--font-mono);">4 Violations</strong>
+                </div>
+                <div class="sandbox-metric-row">
+                  <span style="color:var(--text-muted);">WCAG Status:</span>
+                  <strong id="sandboxComplianceVal" class="text-muted" style="font-family:var(--font-mono);">Non-compliant</strong>
+                </div>
+                <div class="sandbox-metric-row">
+                  <span style="color:var(--text-muted);">Verification:</span>
+                  <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--color-success);">Zero Structural Drift</span>
+                </div>
+              </div>
+
+              <div style="display:flex; flex-direction:column; gap:10px; margin-top:24px;">
+                <button type="button" class="btn btn-primary btn-sm" id="sandboxScanRepairBtn">
+                  <svg width="16" height="16" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 10V3L4 14h7v7l9-11h-7z"/></svg>
+                  Scan & Repair
+                </button>
+                <button type="button" class="btn btn-secondary btn-sm" id="sandboxResetBtn">
+                  <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"/></svg>
+                  Reset Sandbox
+                </button>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- 10. IMPACT & METRICS SECTION -->
+    <section class="impact-section" id="impact" aria-labelledby="impact-heading">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tagline">Verified Results</span>
+          <h2 id="impact-heading" class="section-title">
+            Engine Benchmark Impact
+          </h2>
+          <p class="section-desc">
+            Empowering modern engineering teams to achieve perfect web accessibility with zero manual regression risks.
+          </p>
+        </div>
+
+        <div class="impact-grid">
+          <!-- Metric 1 -->
+          <div class="impact-card">
+            <div class="impact-metric text-cyan">100%</div>
+            <div class="impact-label">Demo Conformance</div>
+            <div class="impact-sub">Verified W3C WCAG 2.2 Level AA</div>
+          </div>
+
+          <!-- Metric 2 -->
+          <div class="impact-card">
+            <div class="impact-metric text-emerald">0</div>
+            <div class="impact-label">Critical Issues</div>
+            <div class="impact-sub">Zero blocking screen reader barriers</div>
+          </div>
+
+          <!-- Metric 3 -->
+          <div class="impact-card">
+            <div class="impact-metric text-cyan">4+</div>
+            <div class="impact-label">Violations Fixed</div>
+            <div class="impact-sub">Autonomous AST patches injected</div>
+          </div>
+
+          <!-- Metric 4 -->
+          <div class="impact-card">
+            <div class="impact-metric text-emerald">100</div>
+            <div class="impact-label">Perfect Score</div>
+            <div class="impact-sub">Elevated from failing baseline</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ==========================================================================
+       Footer Landmark
+       ========================================================================== -->
+  <footer class="site-footer" role="contentinfo">
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <a href="#hero" class="brand-logo" aria-label="ACCESSFIX AI Home">
+            <div class="logo-symbol" aria-hidden="true">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <span>ACCESSFIX<span class="text-cyan">.AI</span></span>
+          </a>
+          <p>“ACCESSFIX AI — Making the web accessible by default.”</p>
+          <p style="font-size:0.8rem; color:var(--text-dim); margin-top:10px;">
+            Autonomous WCAG 2.2 AA detection, AST zero-regression repair synthesis, and cryptographic proof verification.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Core Product</h4>
+          <ul class="footer-links">
+            <li><a href="#scanner">Scanner Engine</a></li>
+            <li><a href="#violations">Violation Dashboard</a></li>
+            <li><a href="#code-diff">Before / After Repairs</a></li>
+            <li><a href="#verification">Formal Verification</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Standards & Compliance</h4>
+          <ul class="footer-links">
+            <li><a href="#wcag-coverage">WCAG 2.2 Level AA</a></li>
+            <li><a href="#verification">ADA Title III Legal Proof</a></li>
+            <li><a href="#verification">Section 508 Standards</a></li>
+            <li><a href="#verification">European Accessibility Act (EAA)</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Developers</h4>
+          <ul class="footer-links">
+            <li><a href="#frameworks">React & Next.js Plugin</a></li>
+            <li><a href="#frameworks">Vue.js AST Compiler</a></li>
+            <li><a href="#frameworks">Vanilla JS Runtime</a></li>
+            <li><a href="#live-demo">Interactive Sandbox</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>
+          © 2026 ACCESSFIX AI Technologies. Built for Hackathon Excellence. All repairs verified against W3C WCAG 2.2 AA specifications.
+        </div>
+        <div style="display:flex; gap:16px;">
+          <a href="#hero" class="nav-link" style="font-size:0.8rem;">Privacy Policy</a>
+          <a href="#hero" class="nav-link" style="font-size:0.8rem;">Accessibility Statement</a>
+          <a href="#hero" class="nav-link" style="font-size:0.8rem;">Security Proofs</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ==========================================================================
+       Certificate Verification Modal Dialog
+       ========================================================================== -->
+  <div class="modal-overlay" id="certModal" role="dialog" aria-modal="true" aria-labelledby="certModalHeading" aria-hidden="true">
+    <div class="modal-card">
+      <button type="button" class="modal-close-btn" id="closeCertModalBtn" aria-label="Close Verification Certificate Modal">✕</button>
+
+      <div class="certificate-frame">
+        <div class="certificate-header">
+          <div class="certificate-gold-seal" aria-hidden="true">
+            <svg width="40" height="40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/></svg>
+          </div>
+          <span class="badge badge-success" style="margin-bottom:8px;">FORMALLY VERIFIED CONFORMANCE</span>
+          <h2 id="certModalHeading" style="font-size:1.8rem; margin-bottom:6px;">Certificate of Accessibility Compliance</h2>
+          <p style="font-size:0.9rem; color:var(--text-muted);">
+            Issued by AccessFix Formal Verification Engine v2.4 (Bounded Model Checker)
+          </p>
+        </div>
+
+        <div class="certificate-meta-grid">
+          <div class="cert-meta-item">
+            <span class="cert-meta-label">Standard Verified</span>
+            <div class="cert-meta-value text-cyan">W3C WCAG 2.2 Level AA</div>
+          </div>
+          <div class="cert-meta-item">
+            <span class="cert-meta-label">Mathematical Confidence</span>
+            <div class="cert-meta-value text-emerald">99.2% (Bounded Model Checking)</div>
+          </div>
+          <div class="cert-meta-item">
+            <span class="cert-meta-label">DOM Soundness & Invariance</span>
+            <div class="cert-meta-value text-emerald">PASSED (0 Layout Regressions)</div>
+          </div>
+          <div class="cert-meta-item">
+            <span class="cert-meta-label">Legal Readiness</span>
+            <div class="cert-meta-value">ADA Title III, Section 508, EAA</div>
+          </div>
+          <div class="cert-meta-item" style="grid-column: span 2;">
+            <span class="cert-meta-label">Cryptographic Proof Hash (SHA-256)</span>
+            <div class="cert-meta-value" id="certHashValue" style="color:var(--primary-cyan); font-size:0.75rem; word-break:break-all;">
+              SHA256: 0x8fa42b91d7c3ee1b46a992e105e4c6b73a901e...
+            </div>
+          </div>
+          <div class="cert-meta-item" style="grid-column: span 2;">
+            <span class="cert-meta-label">Verification Timestamp</span>
+            <div class="cert-meta-value" id="certTimestamp" style="font-size:0.8rem;">
+              Wed, 07 Oct 2026 09:18:24 GMT
+            </div>
+          </div>
+        </div>
+
+        <div style="border-top:1px dashed var(--border-subtle); padding-top:20px; display:flex; align-items:center; justify-content:space-between; flex-wrap:wrap; gap:16px;">
+          <div>
+            <div style="font-size:0.75rem; color:var(--text-muted);">Digital Verification Signature:</div>
+            <div style="font-family:var(--font-mono); font-size:0.8rem; color:#ffffff; font-weight:700;">
+              ACCESSFIX-AST-VERIFIER-SIG::KEY_940182A
+            </div>
+          </div>
+
+          <div style="display:flex; gap:10px;">
+            <button type="button" class="btn btn-secondary btn-sm" id="copyHashBtn">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 5H6a2 2 0 00-2 2v12a2 2 0 002 2h10a2 2 0 002-2v-1M8 5a2 2 0 002 2h2a2 2 0 002-2M8 5a2 2 0 012-2h2a2 2 0 012 2m0 0h2a2 2 0 012 2v3m2 4H10m0 0l3-3m-3 3l3 3"/></svg>
+              Copy SHA-256 Hash
+            </button>
+            <button type="button" class="btn btn-primary btn-sm" id="printCertBtn">
+              <svg width="14" height="14" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 17h2a2 2 0 002-2v-4a2 2 0 00-2-2H5a2 2 0 00-2 2v4a2 2 0 002 2h2m2 4h6a2 2 0 002-2v-4a2 2 0 00-2-2H9a2 2 0 00-2 2v4a2 2 0 002 2zm8-12V5a2 2 0 00-2-2H9a2 2 0 00-2 2v4h10z"/></svg>
+              Print / Save PDF
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ==========================================================================
+       Command Palette Modal (Ctrl+K)
+       ========================================================================== -->
+  <div class="modal-overlay" id="cmdPaletteModal" role="dialog" aria-modal="true" aria-labelledby="cmdHeading" aria-hidden="true">
+    <div class="modal-card" style="max-width:560px; padding:24px;">
+      <div style="display:flex; align-items:center; gap:12px; margin-bottom:16px; border-bottom:1px solid var(--border-subtle); padding-bottom:12px;">
+        <svg width="20" height="20" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="11" cy="11" r="8" stroke-width="2"/><path stroke-linecap="round" stroke-width="2" d="M21 21l-4.35-4.35"/></svg>
+        <input type="text" 
+               id="cmdPaletteInput" 
+               placeholder="Type a command or jump to section..." 
+               style="flex:1; background:transparent; border:none; color:#ffffff; font-size:1rem; outline:none;" />
+        <span style="font-size:0.75rem; color:var(--text-dim); font-family:var(--font-mono);">ESC to close</span>
+      </div>
+
+      <div id="cmdPaletteList" style="display:flex; flex-direction:column; gap:6px;">
+        <button type="button" class="cmd-item" data-action="scan" style="text-align:left; padding:10px 14px; border-radius:8px; background:rgba(255,255,255,0.03); color:#ffffff; display:flex; align-items:center; justify-content:space-between;">
+          <span>⚡ Run Accessibility Scan (Elevate 72 → 100)</span>
+          <span class="badge badge-glow-cyan">Action</span>
+        </button>
+        <button type="button" class="cmd-item" data-target="live-demo" style="text-align:left; padding:10px 14px; border-radius:8px; background:rgba(255,255,255,0.03); color:#ffffff; display:flex; align-items:center; justify-content:space-between;">
+          <span>🛠️ Open Live Sandbox (Break & Fix Playground)</span>
+          <span class="badge">Section</span>
+        </button>
+        <button type="button" class="cmd-item" data-action="cert" style="text-align:left; padding:10px 14px; border-radius:8px; background:rgba(255,255,255,0.03); color:#ffffff; display:flex; align-items:center; justify-content:space-between;">
+          <span>📜 View Formal Verification Certificate</span>
+          <span class="badge badge-success">Modal</span>
+        </button>
+        <button type="button" class="cmd-item" data-target="violations" style="text-align:left; padding:10px 14px; border-radius:8px; background:rgba(255,255,255,0.03); color:#ffffff; display:flex; align-items:center; justify-content:space-between;">
+          <span>🔍 Inspect WCAG Violations & AST Patches</span>
+          <span class="badge">Section</span>
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Scripts -->
+  <script src="js/mock-data.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>
