@@ -1,0 +1,10 @@
+{
+  "name": "accessfix",
+  "version": "2.5.0",
+  "description": "Autonomous Accessibility Remediation Engine",
+  "scripts": {
+    "build": "echo 'Static build ready'",
+    "dev": "npx serve -l 3000 .",
+    "start": "npx serve -l 3000 ."
+  }
+}
